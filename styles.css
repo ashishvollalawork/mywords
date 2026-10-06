@@ -41,7 +41,7 @@ p { margin: 0 0 24px; }
 
 .hero {
   justify-content: center; text-align: center; overflow: hidden;
-  background: linear-gradient(rgba(6,7,14,.56), rgba(6,7,14,.9)), url("Snapchat-594293503.jpg") center/cover no-repeat, #171020;
+  background: linear-gradient(rgba(6,7,14,.56), rgba(6,7,14,.9)), url("/Snapchat-594293503.jpg") center/cover no-repeat, #171020;
 }
 .hero::before { content: ""; position: absolute; inset: -10%; background: radial-gradient(circle at center, rgba(190,89,113,.2), transparent 45%); animation: breathe 7s ease-in-out infinite; }
 .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 35%, var(--bg)); }
@@ -77,7 +77,7 @@ p { margin: 0 0 24px; }
 blockquote { margin: 42px 0; padding: 12px 0 12px 28px; border-left: 2px solid var(--rose); color: #fff; font: italic 500 clamp(1.45rem, 3vw, 2.2rem)/1.4 var(--display); }
 
 .mother { display: grid; grid-template-columns: 1fr 1fr; padding: 0; background: #12101a; }
-.mother-image { min-height: 100vh; background: linear-gradient(rgba(20,12,18,.12), rgba(20,12,18,.52)), url("images/Snapchat-594293503.jpg") center/cover no-repeat, #2a2029; box-shadow: inset -60px 0 100px #12101a; }
+.mother-image { min-height: 100vh; background: linear-gradient(rgba(20,12,18,.12), rgba(20,12,18,.52)), url("/Snapchat-594293503.jpg") center/cover no-repeat, #2a2029; box-shadow: inset -60px 0 100px #12101a; }
 .mother-copy { padding: 90px clamp(32px, 7vw, 100px); }
 .mother-copy h2 { font-size: clamp(3rem, 6vw, 5rem); }
 .mother-copy p { color: #d2ccd0; }
