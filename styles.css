@@ -129,8 +129,14 @@ footer { padding: 24px; text-align: center; color: #77717a; background: #070810;
   .glass-card p { margin-top: 25px; }
   .letter-paper { padding: 28px 22px; }
   .letter-paper p { line-height: 1.7; }
-  .sound-label { display: none; }
-  .sound-button { padding: 9px 12px; }
+  .sound-label {
+  display: inline !important;
+  white-space: nowrap;
+}
+
+.sound-button {
+  min-width: 142px;
+  padding: 9px 12px;
 }
 
 @media (prefers-reduced-motion: reduce) {
