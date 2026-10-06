@@ -28,11 +28,42 @@ function updateProgress() {
 window.addEventListener("scroll", updateProgress, { passive: true });
 updateProgress();
 
-// Optional ambient music. Browsers require a user gesture before playback.
 const soundButton = document.getElementById("soundButton");
 const soundLabel = soundButton.querySelector(".sound-label");
 const music = document.getElementById("backgroundMusic");
 music.volume = 0.28;
+
+let playbackStarted = false;
+
+async function startMusic() {
+  if (playbackStarted || !music.paused) return true;
+  try {
+    await music.play();
+    playbackStarted = true;
+    soundButton.setAttribute("aria-pressed", "true");
+    soundLabel.textContent = "Sound on";
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
+function startMusicFromInteraction() {
+  startMusic().then((started) => {
+    if (started) {
+      document.removeEventListener("pointerdown", startMusicFromInteraction);
+      document.removeEventListener("keydown", startMusicFromInteraction);
+    }
+  });
+}
+
+startMusic().then((started) => {
+  if (!started) {
+    soundLabel.textContent = "Tap for sound";
+    document.addEventListener("pointerdown", startMusicFromInteraction, { once: true });
+    document.addEventListener("keydown", startMusicFromInteraction, { once: true });
+  }
+});
 
 music.addEventListener("error", () => {
   soundLabel.textContent = "Audio unavailable";
@@ -41,17 +72,13 @@ music.addEventListener("error", () => {
 
 soundButton.addEventListener("click", async () => {
   if (music.paused) {
-    try {
-      music.load();
-      await music.play();
-      soundButton.setAttribute("aria-pressed", "true");
-      soundLabel.textContent = "Sound on";
-    } catch (error) {
+    const started = await startMusic();
+    if (!started) {
       soundLabel.textContent = "Audio unavailable";
-      console.info("The audio file could not be played by this browser.", error);
     }
   } else {
     music.pause();
+    playbackStarted = false;
     soundButton.setAttribute("aria-pressed", "false");
     soundLabel.textContent = "Sound off";
   }
