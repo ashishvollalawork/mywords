@@ -34,15 +34,21 @@ const soundLabel = soundButton.querySelector(".sound-label");
 const music = document.getElementById("backgroundMusic");
 music.volume = 0.28;
 
+music.addEventListener("error", () => {
+  soundLabel.textContent = "Audio unavailable";
+  soundButton.setAttribute("aria-pressed", "false");
+});
+
 soundButton.addEventListener("click", async () => {
   if (music.paused) {
     try {
+      music.load();
       await music.play();
       soundButton.setAttribute("aria-pressed", "true");
       soundLabel.textContent = "Sound on";
     } catch (error) {
-      soundLabel.textContent = "Add music file";
-      console.info("Add audio/background-music.mp3 to enable sound.");
+      soundLabel.textContent = "Audio unavailable";
+      console.info("The audio file could not be played by this browser.", error);
     }
   } else {
     music.pause();
